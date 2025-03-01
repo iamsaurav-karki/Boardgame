@@ -78,9 +78,10 @@ jobs:
       - name: Deploy to Kubernetes
         uses: tale/kubectl-action@v1
         with:
-          bas64-kube-config: ${{ secrets.KUBE_CONFIG }}
-          namespace: webapps
-      - run: |
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Apply Kubernetes Deployment
+        run: |
           kubectl apply -f deployment-service.yaml -n webapps
           kubectl get all -n webapps
           kubectl get svc -n webapps
